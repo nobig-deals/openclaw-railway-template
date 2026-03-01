@@ -12,6 +12,7 @@ RUN apt-get update \
     zip \
   && rm -rf /var/lib/apt/lists/*
 
+ARG OPENCLAW_CACHEBUST=2026-03-01
 RUN npm install -g openclaw@latest
 
 WORKDIR /app
