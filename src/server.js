@@ -153,6 +153,15 @@ async function syncAllowedOrigins() {
   if (!publicDomain) return;
 
   const origin = `https://${publicDomain}`;
+
+  const current = await runCmd(
+    OPENCLAW_NODE,
+    clawArgs(["config", "get", "gateway.controlUi.allowedOrigins"]),
+  );
+  if (current.code === 0 && current.output.includes(origin)) {
+    return;
+  }
+
   const result = await runCmd(
     OPENCLAW_NODE,
     clawArgs([
